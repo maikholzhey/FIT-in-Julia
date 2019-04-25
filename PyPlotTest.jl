@@ -1,7 +1,7 @@
 
 #===============
  Pkg.add("PyPlot")
- Pkg.add("Inbteract")
+ Pkg.add("Interact")
     in Julia REPL
 ===============#
 using Plots
