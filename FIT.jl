@@ -6,6 +6,7 @@ using Arpack
 using SparseArrays
 #using UnicodePlots
 using Plots
+pyplot()
 
 # -------------------------------------------------------------------
 # Use Atom Editor using JULIA plugin to keep session alive for speed
@@ -20,7 +21,7 @@ mue0 =4e-7*pi;
 eps0 = 1/(c0^2*mue0);
 
 # geometry
-nx = 161;
+nx = 31;
 ny = nx;
 nz = 2;
 LxMax = (nx-1)*0.5; # 1/2 = 0 !integer division! WELCOME TO PYTHON
@@ -304,5 +305,14 @@ end
 t2 = time_ns()
 total_time = (t2-t1)/1e9
 println(total_time)
+
+# plot e-field
+ez = e[2*np .+ (Array{Int64}(collect(range(1, length = nx*ny, stop = nx*ny))))]
+Efeld = reshape(collect(Iterators.flatten(Array(ez))),nx,ny)
+# make mesh for plot
+X = repeat(reshape(xm, 1, :), length(ym), 1)
+Y = repeat(ym, 1, length(xm))
+#Z = map(f, X, Y)
+p1 = contour(X, Y, Efeld, fill=true)
 
 #println(e)
